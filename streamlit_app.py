@@ -7,6 +7,9 @@ st.write('Esta aplicación fue creada a partir de tres modelo de Machine Learnin
 st.write('by: Silvert Kevin Quispe Pacompia')
 
 with st.expander('Data'):
-  st.write('**Data de Concreto 🏗️')
+  st.write('**Data de Concreto 🏗️**')
   df = pd.read_csv('Concrete_Data_New.csv')
   df
+
+with st.sidebar:
+  concrete = st.slider("Concreto [kg]",0 ,100, 50)
