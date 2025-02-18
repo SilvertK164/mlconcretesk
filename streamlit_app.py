@@ -38,4 +38,4 @@ with st.sidebar:
 input_concrete
   
   #DATOS DE ENTRADA
-  datos = [[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]]
+datos = [[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]]
