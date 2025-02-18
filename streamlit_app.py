@@ -34,6 +34,8 @@ with st.sidebar:
        'Agregado Fino': ag_fino}
   input_df = pd.DataFrame(data, index=[0])
   input_concrete = pd.concat([input_df, X], axis=0)
+
+input_concrete
   
   #DATOS DE ENTRADA
   datos = [[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]]
