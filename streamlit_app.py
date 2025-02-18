@@ -12,4 +12,12 @@ with st.expander('Data'):
   df
 
 with st.sidebar:
-  concrete = st.slider("Concreto [kg]",0 ,100, 50)
+  cemento = st.slider("Cemento [kg]",0 ,100, 50)
+  escoria = st.slider("Escoria [kg]",0 ,100, 50)
+  ceniza = st.slider("Ceniza [kg]",0 ,100, 50)
+  agua = st.slider("Agua [kg]",0 ,100, 50)
+  superplastificante = st.slider("Superplastificante [kg]",0 ,100, 50)
+  ag_grueso = st.slider("Agregado Grueso [kg]",0 ,100, 50)
+  ag_fino = st.slider("Agregado Fino [kg]",0 ,100, 50)
+  #DATOS DE ENTRADA
+  datos = [[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]]
