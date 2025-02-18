@@ -1,13 +1,13 @@
-# 📦 Streamlit App Starter Kit 
+# 📦 ML App Resistencia del Concreto
 ```
 ⬆️ (Replace above with your app's name)
 ```
 
-Description of the app ...
+This web application is used to predict the strength of concrete based on the quantities of binders for the production of concrete.
 
 ## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://mlconcretesk.streamlit.app/)
 
 ## GitHub Codespaces
 
