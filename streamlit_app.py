@@ -10,6 +10,10 @@ with st.expander('Data'):
   st.write('**Data de Concreto 🏗️**')
   df = pd.read_csv('Concrete_Data_New.csv')
   df
+  
+  st.write('**Inputs**')
+  X = df.drop(['EdadDias','ResistenciaCompresion'],axis=1)
+  X
 
 with st.sidebar:
   cemento = st.slider("Cemento [kg]",0 ,100, 50)
@@ -29,6 +33,7 @@ with st.sidebar:
        'Agregado Grueso': ag_grueso,
        'Agregado Fino': ag_fino}
   input_df = pd.DataFrame(data, index=[0])
+  input_concrete = pd.concat([input_df, X])
   
   #DATOS DE ENTRADA
   datos = [[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]]
