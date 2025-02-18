@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.title('Resistencia a la Compresión del Concreto - ML 🤖🏗️')
 
