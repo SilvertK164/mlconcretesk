@@ -19,5 +19,16 @@ with st.sidebar:
   superplastificante = st.slider("Superplastificante [kg]",0 ,100, 50)
   ag_grueso = st.slider("Agregado Grueso [kg]",0 ,100, 50)
   ag_fino = st.slider("Agregado Fino [kg]",0 ,100, 50)
+  
+  #DATAFRAME PARA INPUTS
+  data = {'Cemento': cemento,
+       'EscoriaAltoHorno': escoria,
+       'CenizaVolante' : ceniza,
+       'Agua': agua,
+       'Superplastificante': superplastificante,
+       'Agregado Grueso': ag_grueso,
+       'Agregado Fino': ag_fino}
+  input_df = pd.DataFrame(data, index=[0])
+  
   #DATOS DE ENTRADA
   datos = [[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]]
