@@ -113,9 +113,15 @@ df_all = pd.DataFrame({
 st.subheader("Evolución de la Resistencia (MPa) - Todos los Modelos")
 st.line_chart(df_all)
 
-# Añadir una columna 'Promedio' que calcule el promedio de las predicciones
+# Calcular la columna 'Promedio'
 df_all['Promedio'] = df_all.mean(axis=1)
 
-# Mostrar la tabla con la nueva columna de promedio
-st.subheader("Tabla de Predicciones con Promedio")
-st.dataframe(df_all)
+# Aplicar estilo para resaltar la columna "Promedio"
+styled_df = df_all.style.applymap(
+    lambda x: 'background-color: #FFFF00',  # color amarillo de fondo
+    subset=['Promedio']
+)
+
+# Mostrar la tabla estilizada
+st.subheader("Tabla de Predicciones con Promedio Resaltado")
+st.dataframe(styled_df)
