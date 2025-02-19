@@ -112,3 +112,7 @@ df_all = pd.DataFrame({
 # Mostrar el gráfico combinado
 st.subheader("Evolución de la Resistencia (MPa) - Todos los Modelos")
 st.line_chart(df_all)
+
+# Mostrar la tabla con las predicciones
+st.subheader("Tabla de Predicciones")
+st.dataframe(df_all)
