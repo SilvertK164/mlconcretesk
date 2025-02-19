@@ -83,6 +83,7 @@ st.write("**Inputs seleccionados**")
 st.dataframe(input_df)
 
 st.subheader("Grafico de Resultados")
+st.markdown("**Eje x:** Días |  **Eje y:** Resistencia (MPa)")
 # Preparar los datos de entrada para la predicción
 # Lista de edades a evaluar
 edades = [7, 14, 21, 28]
