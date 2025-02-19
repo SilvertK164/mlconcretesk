@@ -82,9 +82,8 @@ input_df = pd.DataFrame(data, index=[0])
 st.write("**Inputs seleccionados**")
 st.dataframe(input_df)
 
+st.subheader("Grafico de Resultados")
 # Preparar los datos de entrada para la predicción
-
-
 # Lista de edades a evaluar
 edades = [7, 14, 21, 28]
 prediccionesF = []
@@ -117,7 +116,6 @@ df_all = pd.DataFrame({
 }, index=edades)
 
 
-st.subheader("Grafico de Resultados")
 # Crear tres columnas con anchos relativos: izquierda, centro y derecha
 col1, col2 = st.columns([0.25, 0.6])
 
