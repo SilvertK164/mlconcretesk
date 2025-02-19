@@ -83,7 +83,7 @@ df_all = pd.DataFrame({
 }, index=edades)
 
 # Crear tres columnas con anchos relativos: izquierda, centro y derecha
-col1, col2 = st.columns([0.4, 0.6])
+col1, col2, col3 = st.columns([0.25, 0.6, 0.2])
 
 # En la columna izquierda, definimos los checkboxes y construimos la lista de columnas seleccionadas
 with col1:
