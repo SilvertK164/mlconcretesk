@@ -14,7 +14,6 @@ scaler = pickle.load(open('scaler.pkl', 'rb'))
 
 # Título y descripción
 st.title('Resistencia a la Compresión del Concreto - ML 🤖🏗️')
-st.write('Esta aplicación fue creada a partir de tres modelos de Machine Learning')
 
 st.subheader("Acerca de la Aplicación")
 st.markdown(
