@@ -109,27 +109,29 @@ df_all = pd.DataFrame({
     'BaggingRegressor': prediccionesT
 }, index=edades)
 
-# Crear checkboxes para decidir qué modelos mostrar
-mostrar_rf = st.checkbox("Mostrar RandomForestRegressor", value=True)
-mostrar_gb = st.checkbox("Mostrar GradientBoostingRegressor", value=True)
-mostrar_bg = st.checkbox("Mostrar BaggingRegressor", value=True)
+# Crear tres columnas con anchos relativos: izquierda, centro y derecha
+col1, col2, col3 = st.columns([0.4, 0.6])
 
-# Armar la lista de columnas seleccionadas según los checkboxes
-columnas_seleccionadas = []
-if mostrar_rf:
-    columnas_seleccionadas.append("RandomForestRegressor")
-if mostrar_gb:
-    columnas_seleccionadas.append("GradientBoostingRegressor")
-if mostrar_bg:
-    columnas_seleccionadas.append("BaggingRegressor")
+# En la columna izquierda, definimos los checkboxes y construimos la lista de columnas seleccionadas
+with col1:
+    mostrar_rf = st.checkbox("Mostrar RandomForestRegressor", value=True)
+    mostrar_gb = st.checkbox("Mostrar GradientBoostingRegressor", value=True)
+    mostrar_bg = st.checkbox("Mostrar BaggingRegressor", value=True)
+    
+    columnas_seleccionadas = []
+    if mostrar_rf:
+        columnas_seleccionadas.append("RandomForestRegressor")
+    if mostrar_gb:
+        columnas_seleccionadas.append("GradientBoostingRegressor")
+    if mostrar_bg:
+        columnas_seleccionadas.append("BaggingRegressor")
 
-# Mostrar el gráfico sólo si hay al menos una columna seleccionada
-if columnas_seleccionadas:
-    col1, col2, col3 = st.columns([0.2, 0.8, 0.2])
-    with col2:
+# En la columna central, mostramos el gráfico sólo si hay al menos una columna seleccionada
+with col2:
+    if columnas_seleccionadas:
         st.line_chart(df_all[columnas_seleccionadas])
-else:
-    st.write("Por favor, seleccione al menos un modelo para mostrar el gráfico.")
+    else:
+        st.write("Por favor, seleccione al menos un modelo para mostrar el gráfico.")
 
 
 # Calcular la columna 'Promedio'
