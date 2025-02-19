@@ -116,10 +116,20 @@ st.line_chart(df_all)
 # Calcular la columna 'Promedio'
 df_all['Promedio'] = df_all.mean(axis=1)
 
-# Aplicar estilo para resaltar la columna "Promedio"
-styled_df = df_all.style.applymap(
-    lambda x: 'background-color: #FFFF00',  # color amarillo de fondo
-    subset=['Promedio']
+# Resaltar las celdas de la columna 'Promedio' con un fondo verde claro (por ejemplo, #90EE90)
+styled_df = df_all.style.applymap(lambda x: 'background-color: #90EE90', subset=['Promedio'])
+
+# Obtener el índice de la columna "Promedio" para aplicar estilo solo en su encabezado
+col_idx = list(df_all.columns).index('Promedio')
+css_selector = f"th.col_heading.level0.col{col_idx}"
+
+# Aplicar estilo al encabezado de la columna "Promedio" (fondo verde claro y texto en negrita)
+styled_df = styled_df.set_table_styles(
+    [{
+        'selector': css_selector,
+        'props': [('background-color', '#90EE90'), ('font-weight', 'bold')]
+    }],
+    overwrite=False
 )
 
 # Mostrar la tabla estilizada
