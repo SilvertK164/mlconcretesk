@@ -116,6 +116,8 @@ df_all = pd.DataFrame({
     'BaggingRegressor': prediccionesT
 }, index=edades)
 
+
+st.subheader("Grafico de Resultados")
 # Crear tres columnas con anchos relativos: izquierda, centro y derecha
 col1, col2 = st.columns([0.25, 0.6])
 
