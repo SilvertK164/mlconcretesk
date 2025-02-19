@@ -22,13 +22,13 @@ with st.expander('Data'):
 
 # Sidebar para la entrada de insumos
 with st.sidebar:
-    cemento = st.number_input("Cemento [kg]", value=50, step=1)
-    escoria = st.number_input("Escoria [kg]", value=50, step=1)
-    ceniza = st.number_input("Ceniza [kg]", value=50, step=1)
-    agua = st.number_input("Agua [kg]", value=50, step=1)
-    superplastificante = st.number_input("Superplastificante [kg]", value=50, step=1)
-    ag_grueso = st.number_input("Agregado Grueso [kg]", value=50, step=1)
-    ag_fino = st.number_input("Agregado Fino [kg]", value=50, step=1)
+    cemento = st.number_input("Cemento [kg]", value=313.3, step=0.01)
+    escoria = st.number_input("Escoria [kg]", value=262.2, step=0.01)
+    ceniza = st.number_input("Ceniza [kg]", value=0, step=0.01)
+    agua = st.number_input("Agua [kg]", value=175.5, step=0.01)
+    superplastificante = st.number_input("Superplastificante [kg]", value=8.6, step=0.01)
+    ag_grueso = st.number_input("Agregado Grueso [kg]", value=1046.9, step=0.01)
+    ag_fino = st.number_input("Agregado Fino [kg]", value=611.8, step=0.01)
 
 # Mostrar los inputs seleccionados
 data = {
