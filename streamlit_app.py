@@ -35,6 +35,12 @@ with st.sidebar:
     ag_grueso = st.number_input("Agregado Grueso [kg]", value=1055.6, step=0.01, format="%.2f")
     ag_fino = st.number_input("Agregado Fino [kg]", value=777.8, step=0.01, format="%.2f")
 
+    st.markdown("---")
+    st.sidebar.header("Síguenos")
+    st.sidebar.markdown("[LinkedIn](https://www.linkedin.com/in/silvertq/)")
+    st.sidebar.markdown("[Tiktok](https://www.tiktok.com/@silvertk164)")
+    st.sidebar.markdown("[GitHub](https://github.com/SilvertK164)")
+
 # Mostrar los inputs seleccionados
 data = {
     'Cemento': cemento,
