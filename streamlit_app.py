@@ -50,16 +50,17 @@ st.write("**Inputs seleccionados**")
 st.dataframe(input_df)
 
 # Preparar los datos de entrada para la predicción
-datos = np.array([[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]])
+
 
 # Lista de edades a evaluar
-edades = [7, 14, 21, 30]
+edades = [7, 14, 21, 28]
 prediccionesF = []
 prediccionesS = []
 prediccionesT = []
 
 # Predecir la resistencia para cada edad
 for edad in edades:
+    datos = np.array([[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]])
     # Normalizar el registro (la suma se realiza sobre todos los insumos)
     nuevo_registro_normalizado = datos / np.sum(datos)
     # Agregar la edad como columna (se concatena horizontalmente)
