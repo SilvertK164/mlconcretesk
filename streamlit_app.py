@@ -14,7 +14,7 @@ scaler = pickle.load(open('scaler.pkl', 'rb'))
 
 # Título y descripción
 st.markdown(
-    "<h1 style='color: #007EA7;'>Resistencia a la Compresión del Concreto - ML 🤖🏗️</h1>",
+    "<h1 style='color: #007EA7;'> ML - RESISTENCIA A LA COMPRESIÓN DEL CONCRETO🤖🏗️</h1>",
     unsafe_allow_html=True
 )
 
