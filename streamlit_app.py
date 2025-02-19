@@ -125,7 +125,7 @@ if mostrar_bg:
 
 # Mostrar el gráfico sólo si hay al menos una columna seleccionada
 if columnas_seleccionadas:
-    st.line(df_all[columnas_seleccionadas])
+    st.line_chart(df_all[columnas_seleccionadas])
 else:
     st.write("Por favor, seleccione al menos un modelo para mostrar el gráfico.")
 
