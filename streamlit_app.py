@@ -13,7 +13,10 @@ modelT = pickle.load(open('modelT.pkl', 'rb'))
 scaler = pickle.load(open('scaler.pkl', 'rb'))
 
 # Título y descripción
-st.title('Resistencia a la Compresión del Concreto - ML 🤖🏗️')
+st.markdown(
+    "<h1 style='color: #007EA7;'>Resistencia a la Compresión del Concreto - ML 🤖🏗️</h1>",
+    unsafe_allow_html=True
+)
 
 st.subheader("Acerca de la Aplicación")
 st.markdown(
