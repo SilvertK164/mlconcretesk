@@ -23,13 +23,13 @@ with st.expander('Data'):
   #X
 
 with st.sidebar:
-  cemento = st.slider("Cemento [kg]",0 ,100, 50)
-  escoria = st.slider("Escoria [kg]",0 ,100, 50)
-  ceniza = st.slider("Ceniza [kg]",0 ,100, 50)
-  agua = st.slider("Agua [kg]",0 ,100, 50)
-  superplastificante = st.slider("Superplastificante [kg]",0 ,100, 50)
-  ag_grueso = st.slider("Agregado Grueso [kg]",0 ,100, 50)
-  ag_fino = st.slider("Agregado Fino [kg]",0 ,100, 50)
+    cemento = st.number_input("Cemento [kg]", value=50, step=1)
+    escoria = st.number_input("Escoria [kg]", value=50, step=1)
+    ceniza = st.number_input("Ceniza [kg]", value=50, step=1)
+    agua = st.number_input("Agua [kg]", value=50, step=1)
+    superplastificante = st.number_input("Superplastificante [kg]", value=50, step=1)
+    ag_grueso = st.number_input("Agregado Grueso [kg]", value=50, step=1)
+    ag_fino = st.number_input("Agregado Fino [kg]", value=50, step=1)
   
   #DATAFRAME PARA INPUTS
   data = {'Cemento': cemento,
