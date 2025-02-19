@@ -113,6 +113,9 @@ df_all = pd.DataFrame({
 st.subheader("Evolución de la Resistencia (MPa) - Todos los Modelos")
 st.line_chart(df_all)
 
-# Mostrar la tabla con las predicciones
-st.subheader("Tabla de Predicciones")
+# Añadir una columna 'Promedio' que calcule el promedio de las predicciones
+df_all['Promedio'] = df_all.mean(axis=1)
+
+# Mostrar la tabla con la nueva columna de promedio
+st.subheader("Tabla de Predicciones con Promedio")
 st.dataframe(df_all)
