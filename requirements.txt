@@ -1,5 +1,6 @@
 streamlit
-numpy
 pandas
-pickle
+numpy
 matplotlib
+scikit-learn
+pickle5
