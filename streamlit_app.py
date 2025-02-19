@@ -24,7 +24,7 @@ with st.expander('Data'):
 with st.sidebar:
     cemento = st.number_input("Cemento [kg]", value=313.3, step=0.01, format="%.2f")
     escoria = st.number_input("Escoria [kg]", value=262.2, step=0.01, format="%.2f")
-    ceniza = st.number_input("Ceniza [kg]", value=0, step=0.01, format="%.2f")
+    ceniza = st.number_input("Ceniza [kg]", value=0.0, step=0.01, format="%.2f")
     agua = st.number_input("Agua [kg]", value=175.5, step=0.01, format="%.2f")
     superplastificante = st.number_input("Superplastificante [kg]", value=8.6, step=0.01, format="%.2f")
     ag_grueso = st.number_input("Agregado Grueso [kg]", value=1046.9, step=0.01, format="%.2f")
