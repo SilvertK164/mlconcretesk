@@ -53,7 +53,7 @@ st.dataframe(input_df)
 datos = np.array([[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]])
 
 # Lista de edades a evaluar
-edades = [7, 14, 21, 28]
+edades = [7, 14, 21, 30]
 prediccionesF = []
 prediccionesS = []
 prediccionesT = []
