@@ -1,5 +1,12 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+import pickle
+
+modelF = pickle.load(open('modelF.pkl', 'rb'))
+modelS = pickle.load(open('modelS.pkl', 'rb'))
+modelT = pickle.load(open('modelT.pkl', 'rb'))
+scaler = pickle.load(open('scaler.pkl', 'rb'))
 
 st.title('Resistencia a la Compresión del Concreto - ML 🤖🏗️')
 
@@ -39,3 +46,30 @@ input_df
   
   #DATOS DE ENTRADA
 datos = [[cemento, escoria, ceniza, agua, superplastificante, ag_grueso, ag_fino]]
+nuevo_registro_normalizado = datos / np.sum(datos)
+# Lista de edades a evaluar
+edades = [7, 14, 21, 28]
+prediccionesF = []
+prediccionesS = []
+prediccionesT = []
+
+for edad in edades:
+    nuevo_registro_normalizado = np.hstack((nuevo_registro_normalizado, np.array([[edad]])))
+    nuevo_registro_scaled = scaler.transform(nuevo_registro_normalizado)
+    predF = modelF.predict(nuevo_registro_scaled)[0]
+    predS = modelS.predict(nuevo_registro_scaled)[0]
+    predT = modelT.predict(nuevo_registro_scaled)[0]
+    prediccionesF.append(predF)
+    prediccionesS.append(predS)
+    prediccionesT.append(predT)
+  
+edades_np = np.array(edades)
+prediccionesF_np = np.array(prediccionesF)
+prediccionesS_np = np.array(prediccionesS)
+prediccionesT_np = np.array(prediccionesT)
+  
+
+
+
+
+
