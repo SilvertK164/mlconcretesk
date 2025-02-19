@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import matplotlib.pyplot as plt
 
 modelF = pickle.load(open('modelF.pkl', 'rb'))
 modelS = pickle.load(open('modelS.pkl', 'rb'))
