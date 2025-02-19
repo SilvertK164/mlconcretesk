@@ -111,7 +111,7 @@ with col2:
 df_all['Promedio'] = df_all.mean(axis=1)
 
 # Resaltar las celdas de la columna 'Promedio' con un fondo verde claro (por ejemplo, #90EE90)
-styled_df = df_all.style.applymap(lambda x: 'background-color: #90EE90', subset=['Promedio'])
+styled_df = df_all.style.applymap(lambda x: 'background-color: #90EE90; color: black;', subset=['Promedio'])
 
 # Mostrar la tabla estilizada
 st.subheader("Tabla de Predicciones con Promedio Resaltado")
