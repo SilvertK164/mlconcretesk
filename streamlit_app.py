@@ -32,7 +32,7 @@ with st.sidebar:
     ag_fino = st.number_input("Agregado Fino [kg]", value=50, step=1)
   
   #DATAFRAME PARA INPUTS
-  data = {'Cemento': cemento,
+data = {'Cemento': cemento,
        'EscoriaAltoHorno': escoria,
        'CenizaVolante' : ceniza,
        'Agua': agua,
