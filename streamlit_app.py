@@ -72,9 +72,9 @@ for edad in edades:
 
 # Crear un DataFrame unificado usando la edad como índice
 df_all = pd.DataFrame({
-    'Modelo F': prediccionesF,
-    'Modelo S': prediccionesS,
-    'Modelo T': prediccionesT
+    'RandomForestRegressor': prediccionesF,
+    'GradientBoostingRegressor': prediccionesS,
+    'BaggingRegressor': prediccionesT
 }, index=edades)
 
 # Mostrar el gráfico combinado
