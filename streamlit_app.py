@@ -6,33 +6,6 @@ import pickle
 # Configurar la página para un layout amplio
 st.set_page_config(layout="wide")
 
-# Inyectar CSS para personalizar la apariencia con la paleta de colores
-st.markdown(
-    """
-    <style>
-    /* Cambiar el color de fondo general y el texto */
-    body {
-        color: #3A3A3A;
-        background-color: #FFFFFF;
-    }
-    /* Títulos y encabezados */
-    h1 {
-        color: #003459;
-    }
-    h2, h3 {
-        color: #007EA7;
-    }
-    /* Personalizar el sidebar (fondo y texto) */
-    .css-1d391kg {
-        background-color: #FF8C42;
-        color: #FFFFFF;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
 # Cargar los modelos y el scaler
 modelF = pickle.load(open('modelF.pkl', 'rb'))
 modelS = pickle.load(open('modelS.pkl', 'rb'))
@@ -114,12 +87,6 @@ col1, col2 = st.columns([0.4, 0.6])
 
 # En la columna izquierda, definimos los checkboxes y construimos la lista de columnas seleccionadas
 with col1:
-    st.markdown(
-        """
-        <div style="display: flex; flex-direction: column; align-items: center;">
-        """,
-        unsafe_allow_html=True,
-    )
     mostrar_rf = st.checkbox("Mostrar RandomForestRegressor", value=True)
     mostrar_gb = st.checkbox("Mostrar GradientBoostingRegressor", value=True)
     mostrar_bg = st.checkbox("Mostrar BaggingRegressor", value=True)
