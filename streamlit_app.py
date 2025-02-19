@@ -125,7 +125,7 @@ if mostrar_bg:
 
 # Mostrar el gráfico sólo si hay al menos una columna seleccionada
 if columnas_seleccionadas:
-    col1, col2, col3 = st.columns([0.5, 0.8, 0.5])
+    col1, col2, col3 = st.columns([0.2, 0.8, 0.2])
     with col2:
         st.line_chart(df_all[columnas_seleccionadas])
 else:
