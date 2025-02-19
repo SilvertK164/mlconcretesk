@@ -22,7 +22,7 @@ with st.expander('Data'):
 
 # Sidebar para la entrada de insumos
 with st.sidebar:
-    st.image("logo.png", width=150)
+    st.image("aecode-logo.webp", width=150)
     st.write('**✍️ ENTRADA**')
     cemento = st.number_input("Cemento [kg]", value=181.4, step=0.01, format="%.2f")
     escoria = st.number_input("Escoria [kg]", value=0.0, step=0.01, format="%.2f")
