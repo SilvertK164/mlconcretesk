@@ -15,7 +15,17 @@ scaler = pickle.load(open('scaler.pkl', 'rb'))
 # Título y descripción
 st.title('Resistencia a la Compresión del Concreto - ML 🤖🏗️')
 st.write('Esta aplicación fue creada a partir de tres modelos de Machine Learning')
-st.write('by: Silvert Kevin Quispe Pacompia')
+
+st.subheader("Acerca de la Aplicación")
+st.markdown(
+    """
+    Esta aplicación utiliza tres modelos de Machine Learning (RandomForestRegressor, 
+    GradientBoostingRegressor y BaggingRegressor) para predecir la resistencia a la 
+    compresión del concreto. Los insumos ingresados se normalizan y escalonan antes de 
+    generar las predicciones para diferentes edades (en días). Además, se calcula un 
+    promedio de las predicciones para brindar una visión consolidada.
+    """
+)
 
 # Expander para mostrar datos
 with st.expander('Data'):
@@ -40,6 +50,8 @@ with st.sidebar:
     st.sidebar.markdown("[LinkedIn](https://www.linkedin.com/in/silvertq/)")
     st.sidebar.markdown("[Tiktok](https://www.tiktok.com/@silvertk164)")
     st.sidebar.markdown("[GitHub](https://github.com/SilvertK164)")
+
+    st.write('by: Silvert Kevin Quispe Pacompia')
 
 # Mostrar los inputs seleccionados
 data = {
@@ -121,5 +133,15 @@ df_all['Promedio'] = df_all.mean(axis=1)
 styled_df = df_all.style.applymap(lambda x: 'background-color: #90EE90; color: black;', subset=['Promedio'])
 
 # Mostrar la tabla estilizada
+st.info("El área resaltada en la tabla muestra el promedio de las predicciones de los modelos.")
 st.subheader("Tabla de Predicciones con Promedio Resaltado")
 st.dataframe(styled_df)
+
+csv = df_all.to_csv().encode('utf-8')
+st.download_button(
+    "Descargar Predicciones",
+    csv,
+    "predicciones.csv",
+    "text/csv",
+    key='download-csv'
+)
