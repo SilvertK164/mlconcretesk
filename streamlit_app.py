@@ -50,7 +50,8 @@ with st.sidebar:
     st.sidebar.markdown("[LinkedIn](https://www.linkedin.com/in/silvertq/)")
     st.sidebar.markdown("[Tiktok](https://www.tiktok.com/@silvertk164)")
     st.sidebar.markdown("[GitHub](https://github.com/SilvertK164)")
-
+    
+    st.markdown("---")
     st.write('by: Silvert Kevin Quispe Pacompia')
 
 # Mostrar los inputs seleccionados
