@@ -70,17 +70,3 @@ for edad in edades:
     prediccionesS.append(predS)
     prediccionesT.append(predT)
 
-# Crear DataFrames para cada conjunto de predicciones
-dfF = pd.DataFrame({'Edad': edades, 'Resistencia Modelo F': prediccionesF}).set_index('Edad')
-dfS = pd.DataFrame({'Edad': edades, 'Resistencia Modelo S': prediccionesS}).set_index('Edad')
-dfT = pd.DataFrame({'Edad': edades, 'Resistencia Modelo T': prediccionesT}).set_index('Edad')
-
-# Mostrar los gráficos usando las funciones integradas de Streamlit
-st.subheader("Evolución de la Resistencia (MPa) - Modelo F")
-st.line_chart(dfF)
-
-st.subheader("Evolución de la Resistencia (MPa) - Modelo S")
-st.line_chart(dfS)
-
-st.subheader("Evolución de la Resistencia (MPa) - Modelo T")
-st.line_chart(dfT)
