@@ -87,9 +87,9 @@ col1, col2 = st.columns([0.25, 0.6])
 
 # En la columna izquierda, definimos los checkboxes y construimos la lista de columnas seleccionadas
 with col1:
-    mostrar_rf = st.checkbox("Mostrar RandomForestRegressor", value=True)
-    mostrar_gb = st.checkbox("Mostrar GradientBoostingRegressor", value=True)
-    mostrar_bg = st.checkbox("Mostrar BaggingRegressor", value=True)
+    mostrar_rf = st.checkbox("RandomForestRegressor", value=True)
+    mostrar_gb = st.checkbox("GradientBoostingRegressor", value=True)
+    mostrar_bg = st.checkbox("BaggingRegressor", value=True)
     
     columnas_seleccionadas = []
     if mostrar_rf:
