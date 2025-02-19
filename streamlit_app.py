@@ -63,41 +63,20 @@ for edad in edades:
   prediccionesS.append(predS)
   prediccionesT.append(predT)
   
-edades_np = np.array(edades)
-prediccionesF_np = np.array(prediccionesF)
-prediccionesS_np = np.array(prediccionesS)
-prediccionesT_np = np.array(prediccionesT)
+# Crear DataFrames para cada conjunto de predicciones
+dfF = pd.DataFrame({'Edad': edades, 'Resistencia Modelo F': prediccionesF}).set_index('Edad')
+dfS = pd.DataFrame({'Edad': edades, 'Resistencia Modelo S': prediccionesS}).set_index('Edad')
+dfT = pd.DataFrame({'Edad': edades, 'Resistencia Modelo T': prediccionesT}).set_index('Edad')
 
-# Generar y mostrar los gráficos en Streamlit
-st.subheader("Evolución de la Resistencia (MPa)")
+# Mostrar los gráficos usando las funciones integradas de Streamlit
+st.subheader("Evolución de la Resistencia (MPa) - Modelo F")
+st.line_chart(dfF)
 
-# Gráfico para el Modelo F
-figF, axF = plt.subplots(figsize=(8, 6))
-axF.plot(edades_np, prediccionesF_np, marker='o', linestyle='-', color='blue')
-axF.set_title("Resistencia Modelo F")
-axF.set_xlabel("Edad (días)")
-axF.set_ylabel("Resistencia (MPa)")
-axF.grid(True)
-st.pyplot(figF)
+st.subheader("Evolución de la Resistencia (MPa) - Modelo S")
+st.line_chart(dfS)
 
-# Gráfico para el Modelo S
-figS, axS = plt.subplots(figsize=(8, 6))
-axS.plot(edades_np, prediccionesS_np, marker='o', linestyle='-', color='green')
-axS.set_title("Resistencia Modelo S")
-axS.set_xlabel("Edad (días)")
-axS.set_ylabel("Resistencia (MPa)")
-axS.grid(True)
-st.pyplot(figS)
-
-# Gráfico para el Modelo T
-figT, axT = plt.subplots(figsize=(8, 6))
-axT.plot(edades_np, prediccionesT_np, marker='o', linestyle='-', color='black')
-axT.set_title("Resistencia Modelo T")
-axT.set_xlabel("Edad (días)")
-axT.set_ylabel("Resistencia (MPa)")
-axT.grid(True)
-st.pyplot(figT)
-  
+st.subheader("Evolución de la Resistencia (MPa) - Modelo T")
+st.line_chart(dfT)
 
 
 
