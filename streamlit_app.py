@@ -45,7 +45,7 @@ with st.sidebar:
     ag_fino = st.number_input("Agregado Fino [kg]", value=777.8, step=0.01, format="%.2f")
 
     st.markdown("---")
-    st.sidebar.header("Síguenos")
+    st.sidebar.header("Sígueme")
     st.sidebar.markdown(
         """
         <a href="https://www.linkedin.com/in/silvertq/" target="_blank">
