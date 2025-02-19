@@ -49,13 +49,13 @@ with st.sidebar:
     st.sidebar.markdown(
         """
         <a href="https://www.linkedin.com/in/silvertq/" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="24" alt="LinkedIn" style="vertical-align: middle;"> LinkedIn
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="24" alt="LinkedIn" style="vertical-align: middle; filter: brightness(0) invert(1);"> LinkedIn
         </a><br>
         <a href="https://www.tiktok.com/@silvertk164" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" width="24" alt="TikTok" style="vertical-align: middle;"> TikTok
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" width="24" alt="TikTok" style="vertical-align: middle; filter: brightness(0) invert(1);"> TikTok
         </a><br>
         <a href="https://github.com/SilvertK164" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="24" alt="GitHub" style="vertical-align: middle;"> GitHub
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="24" alt="GitHub" style="vertical-align: middle; filter: brightness(0) invert(1);"> GitHub
         </a>
         """,
         unsafe_allow_html=True
