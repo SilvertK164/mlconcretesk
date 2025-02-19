@@ -109,9 +109,26 @@ df_all = pd.DataFrame({
     'BaggingRegressor': prediccionesT
 }, index=edades)
 
-# Mostrar el gráfico combinado
-st.subheader("Evolución de la Resistencia (MPa) - Todos los Modelos")
-st.line_chart(df_all)
+# Crear checkboxes para decidir qué modelos mostrar
+mostrar_rf = st.checkbox("Mostrar RandomForestRegressor", value=True)
+mostrar_gb = st.checkbox("Mostrar GradientBoostingRegressor", value=True)
+mostrar_bg = st.checkbox("Mostrar BaggingRegressor", value=True)
+
+# Armar la lista de columnas seleccionadas según los checkboxes
+columnas_seleccionadas = []
+if mostrar_rf:
+    columnas_seleccionadas.append("RandomForestRegressor")
+if mostrar_gb:
+    columnas_seleccionadas.append("GradientBoostingRegressor")
+if mostrar_bg:
+    columnas_seleccionadas.append("BaggingRegressor")
+
+# Mostrar el gráfico sólo si hay al menos una columna seleccionada
+if columnas_seleccionadas:
+    st.line_chart(df_all[columnas_seleccionadas])
+else:
+    st.write("Por favor, seleccione al menos un modelo para mostrar el gráfico.")
+
 
 # Calcular la columna 'Promedio'
 df_all['Promedio'] = df_all.mean(axis=1)
