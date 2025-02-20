@@ -117,17 +117,20 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             opacity=0.8
         ))
 
-        # Agregar etiquetas al exterior del cilindro
-        etiqueta_x = radio * 1.3  # Empujar etiquetas fuera del cilindro
-        etiqueta_y = 0  # Centrar en Y
-        fig.add_trace(go.Scatter3d(
-            x=[etiqueta_x], 
-            y=[etiqueta_y], 
-            z=[altura_acumulada + cantidad / 2],
-            text=[f"<b>{ingrediente}:</b> {cantidad:.1f} kg"],
-            mode="text",
-            textfont=dict(size=12, color="black")
-        ))
+        # Agregar etiquetas al exterior del cilindro con fondo blanco y bordes redondeados
+        fig.add_annotation(
+            x=etiqueta_x, 
+            y=etiqueta_y, 
+            z=altura_acumulada + cantidad / 2,
+            text=f"<b>{ingrediente}: {cantidad:.1f} kg</b>",
+            showarrow=False,
+            font=dict(size=12, color="black"),
+            align="center",
+            bgcolor="white",  # Fondo blanco
+            borderpad=4,  # Espaciado interno
+            bordercolor="black",  # Borde negro
+            borderwidth=0  # Grosor del borde
+        )
 
         # Actualizar la altura acumulada
         altura_acumulada += cantidad
