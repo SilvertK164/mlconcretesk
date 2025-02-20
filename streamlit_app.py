@@ -70,7 +70,7 @@ with st.sidebar:
     st.write('by: Silvert Kevin Quispe Pacompia')
 
 ########################################################################
-# Diccionario de ingredientes y colores
+# Diccionario de ingredientes con colores
 ingredientes = {
     "Cemento": (cemento, "red"),
     "Escoria": (escoria, "blue"),
@@ -81,51 +81,55 @@ ingredientes = {
     "Agregado Fino": (ag_fino, "brown")
 }
 
-# Normalizar las alturas para visualización
-total = sum([v[0] for v in ingredientes.values()])
-alturas = {k: v[0] / total * 10 for k, v in ingredientes.items()}  # Altura proporcional
-
-# Parámetros del cilindro
-num_slices = len(ingredientes)
-theta = np.linspace(0, 2 * np.pi, num_slices + 1)
-z_top = np.cumsum(list(alturas.values()))
-z_base = np.insert(z_top[:-1], 0, 0)
-
 # Crear la figura
 fig = go.Figure()
 
-for i, (ingrediente, (valor, color)) in enumerate(ingredientes.items()):
-    x = np.cos(theta[i:i+2])
-    y = np.sin(theta[i:i+2])
+# Dimensiones base de los prismas (cada prisma tiene base cuadrada con lado 2)
+base_size = 2
+x_offset = 0  # Para colocar cada prisma en posiciones distintas
 
-    # Crear sección coloreada
+for ingrediente, (altura, color) in ingredientes.items():
+    x = [x_offset, x_offset, x_offset + base_size, x_offset + base_size] * 2
+    y = [0, base_size, base_size, 0] * 2
+    z = [0, 0, 0, 0, altura, altura, altura, altura]
+    
+    # Definir caras del prisma (6 caras)
+    i = [0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4]
+    j = [1, 3, 4, 2, 5, 6, 7, 7, 5, 5, 6, 6, 7, 7, 4, 4, 5, 0]
+    k = [3, 1, 7, 5, 3, 7, 5, 4, 0, 6, 2, 4, 2, 0, 1, 2, 6, 2]
+
+    # Agregar cada prisma a la gráfica
     fig.add_trace(go.Mesh3d(
-        x=[x[0], x[1], x[1], x[0], x[0], x[1], x[1], x[0]],
-        y=[y[0], y[1], y[1], y[0], y[0], y[1], y[1], y[0]],
-        z=[z_base[i], z_base[i], z_top[i], z_top[i], z_base[i], z_base[i], z_top[i], z_top[i]],
+        x=x, y=y, z=z,
+        i=i, j=j, k=k,
         color=color,
         name=ingrediente
     ))
 
-    # Agregar etiquetas
+    # Agregar etiquetas en la parte superior del prisma
     fig.add_trace(go.Scatter3d(
-        x=[np.mean(x)],
-        y=[np.mean(y)],
-        z=[z_top[i] + 0.2],
-        text=[f"{ingrediente}: {valor:.2f} kg/m³"],
+        x=[x_offset + base_size / 2],
+        y=[base_size / 2],
+        z=[altura + 10],  # Ajuste de altura para que no se superponga
+        text=[f"{ingrediente}<br>{altura} kg"],
         mode="text",
-        showlegend=False
+        textfont=dict(size=14, color="black")
     ))
+
+    x_offset += base_size + 2  # Separación entre prismas
 
 # Configurar el layout
 fig.update_layout(
-    title="🌀 Representación 3D de Ingredientes del Concreto",
+    title="📊 Representación 3D de Ingredientes del Concreto",
     scene=dict(
-        xaxis_title="X",
-        yaxis_title="Y",
+        xaxis_title="Ingrediente",
+        yaxis_title="",
         zaxis_title="Cantidad (kg/m³)",
-        xaxis=dict(visible=False),
-        yaxis=dict(visible=False)
+        xaxis=dict(
+            tickmode='array',
+            tickvals=[i * (base_size + 2) for i in range(len(ingredientes))],
+            ticktext=list(ingredientes.keys())
+        )
     ),
     margin=dict(l=0, r=0, b=0, t=40)
 )
