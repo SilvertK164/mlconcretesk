@@ -132,18 +132,16 @@ for ingrediente, (cantidad, color) in ingredientes.items():
         # Actualizar la altura acumulada
         altura_acumulada += cantidad
 
-# Configuración del layout
+# Configuración del layout sin título ni leyenda
 fig.update_layout(
-    title="📊 Cilindro 3D de Ingredientes del Concreto",
     scene=dict(
         xaxis=dict(visible=False),
         yaxis=dict(visible=False),
-        zaxis=dict(visible=False)),
+        zaxis=dict(visible=False),
     ),
     showlegend=False,  # Oculta la leyenda
-    margin=dict(l=0, r=0, b=0, t=0)  # Elimina el espacio del título
+    margin=dict(l=0, r=0, b=0, t=0)  # Ajusta los márgenes para eliminar el espacio extra
 )
-
 ########################################################################
 
 
