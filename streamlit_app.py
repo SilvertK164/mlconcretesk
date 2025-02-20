@@ -81,60 +81,68 @@ ingredientes = {
     "Agregado Fino": (ag_fino, "brown")
 }
 
-# Crear la figura
+# Definir base del prisma
+base_size = 3  # Lado del cuadrado base
+altura_total = sum([valor[0] for valor in ingredientes.values()])  # Altura total acumulada
+
+# Inicializar la figura
 fig = go.Figure()
 
-# Dimensiones base de los prismas (cada prisma tiene base cuadrada con lado 2)
-base_size = 2
-x_offset = 0  # Para colocar cada prisma en posiciones distintas
+# Variables de control
+altura_acumulada = 0  # Para colocar cada rebanada a diferentes alturas
 
-for ingrediente, (altura, color) in ingredientes.items():
-    x = [x_offset, x_offset, x_offset + base_size, x_offset + base_size] * 2
-    y = [0, base_size, base_size, 0] * 2
-    z = [0, 0, 0, 0, altura, altura, altura, altura]
-    
-    # Definir caras del prisma (6 caras)
-    i = [0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4]
-    j = [1, 3, 4, 2, 5, 6, 7, 7, 5, 5, 6, 6, 7, 7, 4, 4, 5, 0]
-    k = [3, 1, 7, 5, 3, 7, 5, 4, 0, 6, 2, 4, 2, 0, 1, 2, 6, 2]
+for ingrediente, (cantidad, color) in ingredientes.items():
+    if cantidad > 0:
+        x = [0, base_size, base_size, 0, 0, base_size, base_size, 0]
+        y = [0, 0, base_size, base_size, 0, 0, base_size, base_size]
+        z = [
+            altura_acumulada, altura_acumulada, altura_acumulada, altura_acumulada,  # Base inferior
+            altura_acumulada + cantidad, altura_acumulada + cantidad, 
+            altura_acumulada + cantidad, altura_acumulada + cantidad  # Base superior
+        ]
 
-    # Agregar cada prisma a la gráfica
-    fig.add_trace(go.Mesh3d(
-        x=x, y=y, z=z,
-        i=i, j=j, k=k,
-        color=color,
-        name=ingrediente
-    ))
+        # Definir caras del prisma
+        i = [0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4]
+        j = [1, 3, 4, 2, 5, 6, 7, 7, 5, 5, 6, 6, 7, 7, 4, 4, 5, 0]
+        k = [3, 1, 7, 5, 3, 7, 5, 4, 0, 6, 2, 4, 2, 0, 1, 2, 6, 2]
 
-    # Agregar etiquetas en la parte superior del prisma
-    fig.add_trace(go.Scatter3d(
-        x=[x_offset + base_size / 2],
-        y=[base_size / 2],
-        z=[altura + 10],  # Ajuste de altura para que no se superponga
-        text=[f"{ingrediente}<br>{altura} kg"],
-        mode="text",
-        textfont=dict(size=14, color="black")
-    ))
+        # Agregar prisma al gráfico
+        fig.add_trace(go.Mesh3d(
+            x=x, y=y, z=z,
+            i=i, j=j, k=k,
+            color=color,
+            opacity=0.8,
+            name=ingrediente
+        ))
 
-    x_offset += base_size + 2  # Separación entre prismas
+        # Agregar etiquetas
+        fig.add_trace(go.Scatter3d(
+            x=[base_size / 2],
+            y=[base_size / 2],
+            z=[altura_acumulada + cantidad / 2],
+            text=[f"{ingrediente}<br>{cantidad:.1f} kg"],
+            mode="text",
+            textfont=dict(size=12, color="black")
+        ))
 
-# Configurar el layout
+        # Actualizar la altura acumulada
+        altura_acumulada += cantidad
+
+# Configuración del layout
 fig.update_layout(
-    title="📊 Representación 3D de Ingredientes del Concreto",
+    title="📊 Prisma 3D Seccionado de Ingredientes del Concreto",
     scene=dict(
-        xaxis_title="Ingrediente",
-        yaxis_title="",
-        zaxis_title="Cantidad (kg/m³)",
-        xaxis=dict(
-            tickmode='array',
-            tickvals=[i * (base_size + 2) for i in range(len(ingredientes))],
-            ticktext=list(ingredientes.keys())
-        )
+        xaxis_title="Base X",
+        yaxis_title="Base Y",
+        zaxis_title="Altura (kg/m³)",
+        xaxis=dict(showticklabels=False),
+        yaxis=dict(showticklabels=False),
+        zaxis=dict(tickvals=list(range(0, int(altura_total) + 50, 100)))
     ),
     margin=dict(l=0, r=0, b=0, t=40)
 )
 
-# Mostrar en Streamlit
+# Mostrar la figura en Streamlit
 st.plotly_chart(fig, use_container_width=True)
 ########################################################################
 
