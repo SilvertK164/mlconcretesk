@@ -91,7 +91,6 @@ y_base = radio * np.sin(theta)
 # Inicializar la figura
 fig = go.Figure()
 altura_acumulada = 0  # Para colocar cada capa a diferentes alturas
-leyenda = []
 
 # Crear las capas cilíndricas apiladas
 for ingrediente, (cantidad, color) in ingredientes.items():
@@ -101,25 +100,26 @@ for ingrediente, (cantidad, color) in ingredientes.items():
 
         # Agregar la capa cilíndrica (como un tubo sin tapas)
         fig.add_trace(go.Surface(
-            x=np.array([x_base, x_base]),
-            y=np.array([y_base, y_base]),
-            z=np.array([z_base, z_top]),
+            x=np.outer(x_base, np.ones(2)),
+            y=np.outer(y_base, np.ones(2)),
+            z=np.outer([altura_acumulada, altura_acumulada + cantidad], np.ones(resolucion)),
             colorscale=[[0, color], [1, color]],
             showscale=False,
-            opacity=0.8
+            opacity=0.9
         ))
 
         # Agregar la tapa superior de cada capa
-        fig.add_trace(go.Mesh3d(
-            x=x_base.tolist(),
-            y=y_base.tolist(),
-            z=z_top.tolist(),
-            color=color,
-            opacity=0.8
+        fig.add_trace(go.Surface(
+            x=[x_base],
+            y=[y_base],
+            z=[z_top],
+            colorscale=[[0, color], [1, color]],
+            showscale=False,
+            opacity=0.9
         ))
 
         # Agregar etiquetas al exterior del cilindro
-        etiqueta_x = radio * 1.2  # Empujar etiquetas fuera del cilindro
+        etiqueta_x = radio * 1.3  # Empujar etiquetas fuera del cilindro
         etiqueta_y = 0  # Centrar en Y
         fig.add_trace(go.Scatter3d(
             x=[etiqueta_x], 
@@ -130,10 +130,23 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             textfont=dict(size=12, color="black")
         ))
 
+        # Actualizar la altura acumulada
+        altura_acumulada += cantidad
+
+# Agregar leyenda
+fig.add_trace(go.Scatter3d(
+    x=[None], y=[None], z=[None],
+    mode="markers",
+    marker=dict(size=10, color=[color for _, color in ingredientes.values()]),
+    text=[ingrediente for ingrediente in ingredientes.keys()],
+    hoverinfo="text",
+    showlegend=True
+))
+
 # Configuración del layout
 fig.update_layout(
     title="📊 Cilindro 3D de Ingredientes del Concreto",
-    showlegend=False,  # Desactivar la leyenda automática de Plotly
+    showlegend=True,  
     scene=dict(
         xaxis=dict(visible=False),
         yaxis=dict(visible=False),
@@ -144,7 +157,6 @@ fig.update_layout(
 
 # Mostrar la figura en Streamlit
 st.plotly_chart(fig, use_container_width=True)
-
 ########################################################################
 
 
