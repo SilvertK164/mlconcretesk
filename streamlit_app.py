@@ -70,15 +70,15 @@ with st.sidebar:
     st.write('by: Silvert Kevin Quispe Pacompia')
 
 ########################################################################
-# Diccionario de ingredientes con colores corregidos
+# Diccionario de ingredientes con colores
 ingredientes = {
-    "Cemento": (cemento, "#5A7D9A"),  # Azul grisáceo
-    "Escoria": (escoria, "#A7C7E7"),  # Azul claro
-    "Ceniza": (ceniza, "#6B8E23"),  # Verde oliva
-    "Agua": (agua, "#00CED1"),  # Turquesa
-    "Superplastificante": (superplastificante, "#D100D1"),  # Magenta intenso
-    "Agregado Grueso": (ag_grueso, "#A9A9A9"),  # Gris oscuro
-    "Agregado Fino": (ag_fino, "#D2B48C")  # Marrón arena
+    "Cemento": (cemento, "red"),
+    "Escoria": (escoria, "blue"),
+    "Ceniza": (ceniza, "green"),
+    "Agua": (agua, "cyan"),
+    "Superplastificante": (superplastificante, "magenta"),
+    "Agregado Grueso": (ag_grueso, "orange"),
+    "Agregado Fino": (ag_fino, "brown")
 }
 
 # Parámetros del cilindro
@@ -100,53 +100,36 @@ for ingrediente, (cantidad, color) in ingredientes.items():
 
         # Agregar la capa cilíndrica (como un tubo sin tapas)
         fig.add_trace(go.Surface(
-            x=np.outer(x_base, np.ones(2)),
-            y=np.outer(y_base, np.ones(2)),
-            z=np.outer([altura_acumulada, altura_acumulada + cantidad], np.ones(resolucion)),
+            x=np.array([x_base, x_base]),
+            y=np.array([y_base, y_base]),
+            z=np.array([z_base, z_top]),
             colorscale=[[0, color], [1, color]],
             showscale=False,
-            opacity=0.9
+            opacity=0.8
         ))
 
         # Agregar la tapa superior de cada capa
-        fig.add_trace(go.Surface(
-            x=[x_base],
-            y=[y_base],
-            z=[z_top],
-            colorscale=[[0, color], [1, color]],
-            showscale=False,
-            opacity=0.9
+        fig.add_trace(go.Mesh3d(
+            x=x_base.tolist(),
+            y=y_base.tolist(),
+            z=z_top.tolist(),
+            color=color,
+            opacity=0.8
         ))
 
-        # Agregar etiquetas al exterior del cilindro
-        etiqueta_x = radio * 1.3  # Empujar etiquetas fuera del cilindro
-        etiqueta_y = 0  # Centrar en Y
+        # Agregar etiqueta al centro de la capa
         fig.add_trace(go.Scatter3d(
-            x=[etiqueta_x], 
-            y=[etiqueta_y], 
-            z=[altura_acumulada + cantidad / 2],
-            text=[f"{ingrediente}: {cantidad:.1f} kg"],
+            x=[0], y=[0], z=[altura_acumulada + cantidad / 2],
+            text=[f"{ingrediente}<br>{cantidad:.1f} kg"],
             mode="text",
             textfont=dict(size=12, color="black")
         ))
 
-        # Actualizar la altura acumulada
-        altura_acumulada += cantidad
-
-# Agregar leyenda
-fig.add_trace(go.Scatter3d(
-    x=[None], y=[None], z=[None],
-    mode="markers",
-    marker=dict(size=10, color=[color for _, color in ingredientes.values()]),
-    text=[ingrediente for ingrediente in ingredientes.keys()],
-    hoverinfo="text",
-    showlegend=True
-))
+        altura_acumulada += cantidad  # Aumentar la altura para la siguiente capa
 
 # Configuración del layout
 fig.update_layout(
     title="📊 Cilindro 3D de Ingredientes del Concreto",
-    showlegend=True,  
     scene=dict(
         xaxis=dict(visible=False),
         yaxis=dict(visible=False),
