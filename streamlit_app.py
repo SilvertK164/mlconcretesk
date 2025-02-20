@@ -48,6 +48,27 @@ with st.sidebar:
     ag_grueso = st.number_input("Agregado Grueso [kg]", value=1055.6, step=0.01, format="%.2f")
     ag_fino = st.number_input("Agregado Fino [kg]", value=777.8, step=0.01, format="%.2f")
 
+    st.markdown("---")
+    st.sidebar.header("Sígueme")
+    st.sidebar.markdown(
+        """
+        <a href="https://www.linkedin.com/in/silvertq/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="24" alt="LinkedIn" style="vertical-align: middle;">LinkedIn
+        </a><br>
+        <a href="https://www.tiktok.com/@silvertk164" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" width="24" alt="TikTok" style="vertical-align: middle; filter: brightness(0) invert(1);">TikTok
+        </a><br>
+        <a href="https://github.com/SilvertK164" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="24" alt="GitHub" style="vertical-align: middle; filter: brightness(0) invert(1);">GitHub
+        </a>
+        """,
+        unsafe_allow_html=True
+    )
+
+    
+    st.markdown("---")
+    st.write('by: Silvert Kevin Quispe Pacompia')
+
 ########################################################################
 # Diccionario de ingredientes y colores
 ingredientes = {
@@ -113,26 +134,6 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 ########################################################################
 
-    st.markdown("---")
-    st.sidebar.header("Sígueme")
-    st.sidebar.markdown(
-        """
-        <a href="https://www.linkedin.com/in/silvertq/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="24" alt="LinkedIn" style="vertical-align: middle;">LinkedIn
-        </a><br>
-        <a href="https://www.tiktok.com/@silvertk164" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" width="24" alt="TikTok" style="vertical-align: middle; filter: brightness(0) invert(1);">TikTok
-        </a><br>
-        <a href="https://github.com/SilvertK164" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="24" alt="GitHub" style="vertical-align: middle; filter: brightness(0) invert(1);">GitHub
-        </a>
-        """,
-        unsafe_allow_html=True
-    )
-
-    
-    st.markdown("---")
-    st.write('by: Silvert Kevin Quispe Pacompia')
 
 # Mostrar los inputs seleccionados
 data = {
