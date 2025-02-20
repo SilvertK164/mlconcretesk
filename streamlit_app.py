@@ -81,56 +81,55 @@ ingredientes = {
     "Agregado Fino": (ag_fino, "brown")
 }
 
-# Definir dimensiones del prisma
-base_size = 2  # Lado del cuadrado base
-altura_total = sum([valor[0] for valor in ingredientes.values()])  # Altura total acumulada
+# Parámetros del cilindro
+radio = 2  # Radio del cilindro
+resolucion = 40  # Resolución del cilindro
+theta = np.linspace(0, 2*np.pi, resolucion)
+x_base = radio * np.cos(theta)
+y_base = radio * np.sin(theta)
 
 # Inicializar la figura
 fig = go.Figure()
-
-# Variables de control
 altura_acumulada = 0  # Para colocar cada capa a diferentes alturas
 
+# Crear las capas cilíndricas apiladas
 for ingrediente, (cantidad, color) in ingredientes.items():
     if cantidad > 0:
-        x = [0, base_size, base_size, 0, 0, base_size, base_size, 0]
-        y = [0, 0, base_size, base_size, 0, 0, base_size, base_size]
-        z = [
-            altura_acumulada, altura_acumulada, altura_acumulada, altura_acumulada,  # Base inferior
-            altura_acumulada + cantidad, altura_acumulada + cantidad, 
-            altura_acumulada + cantidad, altura_acumulada + cantidad  # Base superior
-        ]
+        z_base = np.full_like(theta, altura_acumulada)  # Base de la capa
+        z_top = np.full_like(theta, altura_acumulada + cantidad)  # Parte superior
 
-        # Definir caras del prisma (base inferior, base superior y caras laterales)
-        i = [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3]
-        j = [1, 2, 3, 0, 5, 6, 7, 4, 5, 6, 7, 4]
-        k = [5, 6, 7, 4, 1, 2, 3, 0, 6, 7, 4, 5]
-
-        # Agregar prisma al gráfico
-        fig.add_trace(go.Mesh3d(
-            x=x, y=y, z=z,
-            i=i, j=j, k=k,
-            color=color,
-            opacity=0.8,
-            name=ingrediente
+        # Agregar la capa cilíndrica (como un tubo sin tapas)
+        fig.add_trace(go.Surface(
+            x=np.array([x_base, x_base]),
+            y=np.array([y_base, y_base]),
+            z=np.array([z_base, z_top]),
+            colorscale=[[0, color], [1, color]],
+            showscale=False,
+            opacity=0.8
         ))
 
-        # Agregar etiquetas centradas en la rebanada
+        # Agregar la tapa superior de cada capa
+        fig.add_trace(go.Mesh3d(
+            x=x_base.tolist(),
+            y=y_base.tolist(),
+            z=z_top.tolist(),
+            color=color,
+            opacity=0.8
+        ))
+
+        # Agregar etiqueta al centro de la capa
         fig.add_trace(go.Scatter3d(
-            x=[base_size / 2],
-            y=[base_size / 2],
-            z=[altura_acumulada + cantidad / 2],
+            x=[0], y=[0], z=[altura_acumulada + cantidad / 2],
             text=[f"{ingrediente}<br>{cantidad:.1f} kg"],
             mode="text",
             textfont=dict(size=12, color="black")
         ))
 
-        # Actualizar la altura acumulada
-        altura_acumulada += cantidad
+        altura_acumulada += cantidad  # Aumentar la altura para la siguiente capa
 
 # Configuración del layout
 fig.update_layout(
-    title="📊 Prisma 3D de Ingredientes del Concreto",
+    title="📊 Cilindro 3D de Ingredientes del Concreto",
     scene=dict(
         xaxis=dict(visible=False),
         yaxis=dict(visible=False),
