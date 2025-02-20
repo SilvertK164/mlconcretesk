@@ -70,15 +70,15 @@ with st.sidebar:
     st.write('by: Silvert Kevin Quispe Pacompia')
 
 ########################################################################
-# Diccionario de ingredientes con colores
+# Diccionario de ingredientes con colores corregidos
 ingredientes = {
-    "Cemento": (cemento, "#557285"),
-    "Escoria": (escoria, "blue"),
-    "Ceniza": (ceniza, "green"),
-    "Agua": (agua, "#49e8da"),
-    "Superplastificante": (superplastificante, "magenta"),
-    "Agregado Grueso": (ag_grueso, "#9dacbd"),
-    "Agregado Fino": (ag_fino, "#d8cdbf")
+    "Cemento": (cemento, "#5A7D9A"),  # Azul grisáceo
+    "Escoria": (escoria, "#A7C7E7"),  # Azul claro
+    "Ceniza": (ceniza, "#6B8E23"),  # Verde oliva
+    "Agua": (agua, "#00CED1"),  # Turquesa
+    "Superplastificante": (superplastificante, "#D100D1"),  # Magenta intenso
+    "Agregado Grueso": (ag_grueso, "#A9A9A9"),  # Gris oscuro
+    "Agregado Fino": (ag_fino, "#D2B48C")  # Marrón arena
 }
 
 # Parámetros del cilindro
