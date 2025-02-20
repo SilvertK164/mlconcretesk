@@ -117,12 +117,14 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             opacity=0.8
         ))
 
-        # Agregar etiquetas al exterior del cilindro en negrita
+        # Agregar etiquetas al exterior del cilindro
+        etiqueta_x = radio * 1.5  # Empujar etiquetas fuera del cilindro
+        etiqueta_y = 0  # Centrar en Y
         fig.add_trace(go.Scatter3d(
             x=[etiqueta_x], 
             y=[etiqueta_y], 
             z=[altura_acumulada + cantidad / 2],
-            text=[f"<b>{ingrediente}: {cantidad:.1f} kg</b>"],  # 🔥 Texto en negrita
+            text=[f"{ingrediente}: {cantidad:.1f} kg"],
             mode="text",
             textfont=dict(size=12, color="black")
         ))
