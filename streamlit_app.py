@@ -81,15 +81,15 @@ ingredientes = {
     "Agregado Fino": (ag_fino, "brown")
 }
 
-# Definir base del prisma
-base_size = 3  # Lado del cuadrado base
+# Definir dimensiones del prisma
+base_size = 2  # Lado del cuadrado base
 altura_total = sum([valor[0] for valor in ingredientes.values()])  # Altura total acumulada
 
 # Inicializar la figura
 fig = go.Figure()
 
 # Variables de control
-altura_acumulada = 0  # Para colocar cada rebanada a diferentes alturas
+altura_acumulada = 0  # Para colocar cada capa a diferentes alturas
 
 for ingrediente, (cantidad, color) in ingredientes.items():
     if cantidad > 0:
@@ -101,10 +101,10 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             altura_acumulada + cantidad, altura_acumulada + cantidad  # Base superior
         ]
 
-        # Definir caras del prisma
-        i = [0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4]
-        j = [1, 3, 4, 2, 5, 6, 7, 7, 5, 5, 6, 6, 7, 7, 4, 4, 5, 0]
-        k = [3, 1, 7, 5, 3, 7, 5, 4, 0, 6, 2, 4, 2, 0, 1, 2, 6, 2]
+        # Definir caras del prisma (base inferior, base superior y caras laterales)
+        i = [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3]
+        j = [1, 2, 3, 0, 5, 6, 7, 4, 5, 6, 7, 4]
+        k = [5, 6, 7, 4, 1, 2, 3, 0, 6, 7, 4, 5]
 
         # Agregar prisma al gráfico
         fig.add_trace(go.Mesh3d(
@@ -115,7 +115,7 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             name=ingrediente
         ))
 
-        # Agregar etiquetas
+        # Agregar etiquetas centradas en la rebanada
         fig.add_trace(go.Scatter3d(
             x=[base_size / 2],
             y=[base_size / 2],
@@ -130,14 +130,11 @@ for ingrediente, (cantidad, color) in ingredientes.items():
 
 # Configuración del layout
 fig.update_layout(
-    title="📊 Prisma 3D Seccionado de Ingredientes del Concreto",
+    title="📊 Prisma 3D de Ingredientes del Concreto",
     scene=dict(
-        xaxis_title="Base X",
-        yaxis_title="Base Y",
-        zaxis_title="Altura (kg/m³)",
-        xaxis=dict(showticklabels=False),
-        yaxis=dict(showticklabels=False),
-        zaxis=dict(tickvals=list(range(0, int(altura_total) + 50, 100)))
+        xaxis=dict(visible=False),
+        yaxis=dict(visible=False),
+        zaxis=dict(title="Altura (kg)", showticklabels=False),
     ),
     margin=dict(l=0, r=0, b=0, t=40)
 )
