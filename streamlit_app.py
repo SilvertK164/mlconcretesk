@@ -117,15 +117,20 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             opacity=0.8
         ))
 
-        # Agregar etiqueta al centro de la capa
+        # Agregar etiquetas al exterior del cilindro
+        etiqueta_x = radio * 1.3  # Empujar etiquetas fuera del cilindro
+        etiqueta_y = 0  # Centrar en Y
         fig.add_trace(go.Scatter3d(
-            x=[0], y=[0], z=[altura_acumulada + cantidad / 2],
-            text=[f"{ingrediente}<br>{cantidad:.1f} kg"],
+            x=[etiqueta_x], 
+            y=[etiqueta_y], 
+            z=[altura_acumulada + cantidad / 2],
+            text=[f"{ingrediente}: {cantidad:.1f} kg"],
             mode="text",
             textfont=dict(size=12, color="black")
         ))
 
-        altura_acumulada += cantidad  # Aumentar la altura para la siguiente capa
+        # Actualizar la altura acumulada
+        altura_acumulada += cantidad
 
 # Configuración del layout
 fig.update_layout(
