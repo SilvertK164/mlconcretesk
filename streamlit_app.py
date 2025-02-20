@@ -91,6 +91,7 @@ y_base = radio * np.sin(theta)
 # Inicializar la figura
 fig = go.Figure()
 altura_acumulada = 0  # Para colocar cada capa a diferentes alturas
+leyenda = []
 
 # Crear las capas cilíndricas apiladas
 for ingrediente, (cantidad, color) in ingredientes.items():
@@ -117,19 +118,27 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             opacity=0.8
         ))
 
-        # Agregar etiqueta al centro de la capa
+        # Agregar etiquetas al exterior del cilindro
+        etiqueta_x = radio * 1.2  # Empujar etiquetas fuera del cilindro
+        etiqueta_y = 0  # Centrar en Y
         fig.add_trace(go.Scatter3d(
-            x=[0], y=[0], z=[altura_acumulada + cantidad / 2],
-            text=[f"{ingrediente}<br>{cantidad:.1f} kg"],
+            x=[etiqueta_x], 
+            y=[etiqueta_y], 
+            z=[altura_acumulada + cantidad / 2],
+            text=[f"{ingrediente}: {cantidad:.1f} kg"],
             mode="text",
             textfont=dict(size=12, color="black")
         ))
+
+        # Agregar a la leyenda manual
+        leyenda.append(f"<span style='color:{color}; font-size:16px'>⬤ {ingrediente}</span>")
 
         altura_acumulada += cantidad  # Aumentar la altura para la siguiente capa
 
 # Configuración del layout
 fig.update_layout(
     title="📊 Cilindro 3D de Ingredientes del Concreto",
+    showlegend=False,  # Desactivar la leyenda automática de Plotly
     scene=dict(
         xaxis=dict(visible=False),
         yaxis=dict(visible=False),
@@ -140,6 +149,10 @@ fig.update_layout(
 
 # Mostrar la figura en Streamlit
 st.plotly_chart(fig, use_container_width=True)
+
+# Agregar la leyenda personalizada
+st.markdown("### 🏷️ Leyenda de Ingredientes")
+st.markdown("<br>".join(leyenda), unsafe_allow_html=True)
 ########################################################################
 
 
