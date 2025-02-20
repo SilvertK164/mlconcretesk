@@ -143,8 +143,7 @@ fig.update_layout(
     margin=dict(l=0, r=0, b=0, t=40)
 )
 
-# Mostrar la figura en Streamlit
-st.plotly_chart(fig, use_container_width=True)
+
 ########################################################################
 
 
@@ -198,7 +197,7 @@ df_all = pd.DataFrame({
 
 
 # Crear tres columnas con anchos relativos: izquierda, centro y derecha
-col1, col2 = st.columns([0.25, 0.6])
+col1, col2, col3 = st.columns([0.25, 0.6, 0.25])
 
 # En la columna izquierda, definimos los checkboxes y construimos la lista de columnas seleccionadas
 with col1:
@@ -221,6 +220,9 @@ with col2:
     else:
         st.write("Por favor, seleccione al menos un modelo para mostrar el gráfico.")
 
+with col3:
+    # Mostrar la figura en Streamlit
+    st.plotly_chart(fig, use_container_width=True)    
 
 # Calcular la columna 'Promedio'
 df_all['Promedio'] = df_all.mean(axis=1)
