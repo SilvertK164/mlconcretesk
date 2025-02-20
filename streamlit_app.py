@@ -138,11 +138,11 @@ fig.update_layout(
     scene=dict(
         xaxis=dict(visible=False),
         yaxis=dict(visible=False),
-        zaxis=dict(title="Altura (kg)", showticklabels=False),
+        zaxis=dict(visible=False)),
     ),
-    margin=dict(l=0, r=0, b=0, t=40)
+    showlegend=False,  # Oculta la leyenda
+    margin=dict(l=0, r=0, b=0, t=0)  # Elimina el espacio del título
 )
-
 
 ########################################################################
 
@@ -197,7 +197,7 @@ df_all = pd.DataFrame({
 
 
 # Crear tres columnas con anchos relativos: izquierda, centro y derecha
-col1, col2, col3 = st.columns([0.20, 0.20, 0.60])
+col1, col2, col3 = st.columns([0.20, 0.30, 0.60])
 
 # En la columna izquierda, definimos los checkboxes y construimos la lista de columnas seleccionadas
 with col1:
