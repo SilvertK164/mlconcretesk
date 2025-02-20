@@ -72,13 +72,13 @@ with st.sidebar:
 ########################################################################
 # Diccionario de ingredientes con colores
 ingredientes = {
-    "Cemento": (cemento, "red"),
-    "Escoria": (escoria, "blue"),
-    "Ceniza": (ceniza, "green"),
-    "Agua": (agua, "cyan"),
-    "Superplastificante": (superplastificante, "magenta"),
-    "Agregado Grueso": (ag_grueso, "orange"),
-    "Agregado Fino": (ag_fino, "brown")
+    "Cemento": (cemento, "#5A7D9A"),  # Azul grisáceo
+    "Escoria": (escoria, "#A7C7E7"),  # Azul claro
+    "Ceniza": (ceniza, "#6B8E23"),  # Verde oliva
+    "Agua": (agua, "#00CED1"),  # Turquesa
+    "Superplastificante": (superplastificante, "#D100D1"),  # Magenta intenso
+    "Agregado Grueso": (ag_grueso, "#A9A9A9"),  # Gris oscuro
+    "Agregado Fino": (ag_fino, "#D2B48C")  # Marrón arena
 }
 
 # Parámetros del cilindro
