@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import plotly.graph_objects as go
 
 # Configurar la página para un layout amplio
 st.set_page_config(layout="wide")
@@ -46,6 +47,71 @@ with st.sidebar:
     superplastificante = st.number_input("Superplastificante [kg]", value=7.6, step=0.01, format="%.2f")
     ag_grueso = st.number_input("Agregado Grueso [kg]", value=1055.6, step=0.01, format="%.2f")
     ag_fino = st.number_input("Agregado Fino [kg]", value=777.8, step=0.01, format="%.2f")
+
+########################################################################
+# Diccionario de ingredientes y colores
+ingredientes = {
+    "Cemento": (cemento, "red"),
+    "Escoria": (escoria, "blue"),
+    "Ceniza": (ceniza, "green"),
+    "Agua": (agua, "cyan"),
+    "Superplastificante": (superplastificante, "magenta"),
+    "Agregado Grueso": (ag_grueso, "orange"),
+    "Agregado Fino": (ag_fino, "brown")
+}
+
+# Normalizar las alturas para visualización
+total = sum([v[0] for v in ingredientes.values()])
+alturas = {k: v[0] / total * 10 for k, v in ingredientes.items()}  # Altura proporcional
+
+# Parámetros del cilindro
+num_slices = len(ingredientes)
+theta = np.linspace(0, 2 * np.pi, num_slices + 1)
+z_top = np.cumsum(list(alturas.values()))
+z_base = np.insert(z_top[:-1], 0, 0)
+
+# Crear la figura
+fig = go.Figure()
+
+for i, (ingrediente, (valor, color)) in enumerate(ingredientes.items()):
+    x = np.cos(theta[i:i+2])
+    y = np.sin(theta[i:i+2])
+
+    # Crear sección coloreada
+    fig.add_trace(go.Mesh3d(
+        x=[x[0], x[1], x[1], x[0], x[0], x[1], x[1], x[0]],
+        y=[y[0], y[1], y[1], y[0], y[0], y[1], y[1], y[0]],
+        z=[z_base[i], z_base[i], z_top[i], z_top[i], z_base[i], z_base[i], z_top[i], z_top[i]],
+        color=color,
+        name=ingrediente
+    ))
+
+    # Agregar etiquetas
+    fig.add_trace(go.Scatter3d(
+        x=[np.mean(x)],
+        y=[np.mean(y)],
+        z=[z_top[i] + 0.2],
+        text=[f"{ingrediente}: {valor:.2f} kg/m³"],
+        mode="text",
+        showlegend=False
+    ))
+
+# Configurar el layout
+fig.update_layout(
+    title="🌀 Representación 3D de Ingredientes del Concreto",
+    scene=dict(
+        xaxis_title="X",
+        yaxis_title="Y",
+        zaxis_title="Cantidad (kg/m³)",
+        xaxis=dict(visible=False),
+        yaxis=dict(visible=False)
+    ),
+    margin=dict(l=0, r=0, b=0, t=40)
+)
+
+# Mostrar en Streamlit
+st.plotly_chart(fig, use_container_width=True)
+########################################################################
 
     st.markdown("---")
     st.sidebar.header("Sígueme")
