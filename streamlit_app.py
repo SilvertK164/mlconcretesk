@@ -124,7 +124,7 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             x=[etiqueta_x], 
             y=[etiqueta_y], 
             z=[altura_acumulada + cantidad / 2],
-            text=[f"<b>{ingrediente}: {cantidad:.1f} kg</b>"],
+            text=[f"<b>{ingrediente}:</b> {cantidad:.1f} kg"],
             mode="text",
             textfont=dict(size=12, color="black")
         ))
