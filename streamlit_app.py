@@ -72,13 +72,13 @@ with st.sidebar:
 ########################################################################
 # Diccionario de ingredientes con colores
 ingredientes = {
-    "Cemento": (cemento, "red"),
+    "Cemento": (cemento, "#557285"),
     "Escoria": (escoria, "blue"),
     "Ceniza": (ceniza, "green"),
-    "Agua": (agua, "cyan"),
+    "Agua": (agua, "#49e8da"),
     "Superplastificante": (superplastificante, "magenta"),
-    "Agregado Grueso": (ag_grueso, "orange"),
-    "Agregado Fino": (ag_fino, "brown")
+    "Agregado Grueso": (ag_grueso, "#9dacbd"),
+    "Agregado Fino": (ag_fino, "#d8cdbf")
 }
 
 # Parámetros del cilindro
@@ -130,11 +130,6 @@ for ingrediente, (cantidad, color) in ingredientes.items():
             textfont=dict(size=12, color="black")
         ))
 
-        # Agregar a la leyenda manual
-        leyenda.append(f"<span style='color:{color}; font-size:16px'>⬤ {ingrediente}</span>")
-
-        altura_acumulada += cantidad  # Aumentar la altura para la siguiente capa
-
 # Configuración del layout
 fig.update_layout(
     title="📊 Cilindro 3D de Ingredientes del Concreto",
@@ -150,9 +145,6 @@ fig.update_layout(
 # Mostrar la figura en Streamlit
 st.plotly_chart(fig, use_container_width=True)
 
-# Agregar la leyenda personalizada
-st.markdown("### 🏷️ Leyenda de Ingredientes")
-st.markdown("<br>".join(leyenda), unsafe_allow_html=True)
 ########################################################################
 
 
